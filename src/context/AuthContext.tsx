@@ -1,14 +1,9 @@
 import React, { createContext, useState, useMemo } from "react";
 import { createUser, getUser } from "../utils/localStarage";
-
-interface User {
-  id: string;
-  username: string;
-  password: string;
-}
+import { IUser } from "../types/User";
 
 interface AuthContextType {
-  user: User | null;
+  user: IUser | null;
   login: (username: string, password: string) => Promise<void>;
   register: (username: string, password: string) => Promise<void>;
   logout: () => void;
@@ -24,7 +19,7 @@ export const AuthContext = createContext<AuthContextType>({
 export const AuthProvider: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<IUser | null>(null);
 
   const login = async (username: string, password: string) => {
     const storedUser = getUser();
@@ -43,7 +38,13 @@ export const AuthProvider: React.FC<React.PropsWithChildren> = ({
   };
 
   const register = async (username: string, password: string) => {
-    const newUser = { id: crypto.randomUUID(), username, password };
+    const newUser = {
+      id: crypto.randomUUID(),
+      username,
+      password,
+      createdAt: new Date(),
+      books: [],
+    };
     createUser(newUser);
     setUser(newUser);
   };
