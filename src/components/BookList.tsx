@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { BookContext } from "../context/BookContext";
 import BookItem from "./BookItem";
 import { SortMethod } from "../types/BookContext";
+import styled from "styled-components";
 
 const BookList: React.FC = () => {
   const { books, sortMethod, setSortMethod } = useContext(BookContext);
@@ -14,22 +15,29 @@ const BookList: React.FC = () => {
         value={sortMethod}
         onChange={(e) => setSortMethod(e.target.value as SortMethod)}
       >
-        <option value={SortMethod.UpdatedDesc}>Latest Update</option>
-        <option value={SortMethod.UpdatedAsc}>Oldest Update</option>
         <option value={SortMethod.TitleAsc}>Title (A-Z)</option>
         <option value={SortMethod.TitleDesc}>Title (Z-A)</option>
         <option value={SortMethod.AuthorAsc}>Author (A-Z)</option>
         <option value={SortMethod.AuthorDesc}>Author (Z-A)</option>
-        <option value={SortMethod.CreatedDesc}>Latest Created</option>
-        <option value={SortMethod.CreatedAsc}>Oldest Created</option>
       </select>
-      <ul>
+      <StyledBooklist>
         {books.map((book) => (
           <BookItem key={book.id} book={book} />
         ))}
-      </ul>
+      </StyledBooklist>
     </div>
   );
 };
 
 export default BookList;
+
+const StyledBooklist = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  min-width: 320px;
+  max-width: 1280px;
+  margin: 0 auto;
+  width: 100%;
+`;

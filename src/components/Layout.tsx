@@ -53,8 +53,6 @@ const Wrapper = styled.div`
 
 const Main = styled.main`
   padding: 1rem;
-  max-width: 1280px;
-  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;

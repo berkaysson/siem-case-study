@@ -4,12 +4,13 @@ import BookList from "./BookList";
 import Modal from "./ui/Modal";
 import Button from "./ui/Button";
 import { BadgePlus } from "lucide-react";
+import styled from "styled-components";
 
 const Books: React.FC = () => {
   const [isBookFormModalOpen, setIsBookFormModalOpen] = useState(false);
 
   return (
-    <div>
+    <StyledBooks>
       <div>
         <Button
           onClick={() => setIsBookFormModalOpen(true)}
@@ -25,8 +26,17 @@ const Books: React.FC = () => {
           <BookForm setIsBookFormModalOpen={setIsBookFormModalOpen} />
         </Modal>
       )}
-    </div>
+    </StyledBooks>
   );
 };
 
 export default Books;
+
+const StyledBooks = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  min-width: 320px;
+  max-width: 1280px;
+`;
