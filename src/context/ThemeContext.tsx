@@ -3,17 +3,19 @@ import React, { createContext, useState } from "react";
 import { ThemeProvider as StyledThemeProvider } from "styled-components";
 
 const lightTheme = {
-  background: "#f1faee",
-  text: "#15273f",
-  primary: "#a8dadc",
-  secondary: "#457b9d",
+  background: "#ffffff",
+  text: "#081e44",
+  textAlt: "#20a3fe",
+  hover: "#a0c0da83",
+  boxShadow: "0 0 1px 1px #a0c0da83 inset",
 };
 
 const darkTheme = {
-  background: "#15273f",
+  background: "#081e44",
   text: "#f1faee",
-  primary: "#457b9d",
-  secondary: "#a8dadc",
+  textAlt: "#20a3fe",
+  hover: "#a0c0da83",
+  boxShadow: "0 0 1px 1px #a0c0da83 inset",
 };
 
 interface ThemeContextType {

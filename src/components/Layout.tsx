@@ -13,26 +13,49 @@ import { AuthContext } from "../context/AuthContext";
 import { useContext } from "react";
 import NotFound from "./NotFound";
 import Navigation from "./ui/Navigation";
+import { ThemeContext } from "../context/ThemeContext";
+import styled from "styled-components";
 
 const Layout: React.FC = () => {
+  const { theme } = useContext(ThemeContext);
   const { user } = useContext(AuthContext);
 
   return (
-    <Router>
-      <Navigation />
-      <Routes>
-        <Route element={<PublicRoute isAuthenticated={!!user} />}>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-        </Route>
-        <Route element={<PrivateRoute isAuthenticated={!!user} />}>
-          <Route path="/books" element={<Books />} />
-        </Route>
-        <Route path="/" element={<Navigate to="/login" replace />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </Router>
+    <Wrapper theme={theme}>
+      <Router>
+        <Navigation />
+        <Main>
+          <Routes>
+            <Route element={<PublicRoute isAuthenticated={!!user} />}>
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+            </Route>
+            <Route element={<PrivateRoute isAuthenticated={!!user} />}>
+              <Route path="/books" element={<Books />} />
+            </Route>
+            <Route path="/" element={<Navigate to="/login" replace />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Main>
+      </Router>
+    </Wrapper>
   );
 };
 
 export default Layout;
+
+const Wrapper = styled.div`
+  background-color: ${(props) => props.theme.background};
+  color: ${(props) => props.theme.text};
+  min-height: 100%;
+  min-width: 100vw;
+`;
+
+const Main = styled.main`
+  padding: 1rem;
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
