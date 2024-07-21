@@ -16,7 +16,7 @@ export const BookContext = createContext<BookContextType>({
   addBook: () => {},
   deleteBook: () => {},
   updateBook: () => {},
-  sortMethod: SortMethod.UpdatedDesc,
+  sortMethod: SortMethod.AuthorAsc,
   setSortMethod: () => {},
 });
 
@@ -26,24 +26,12 @@ export const BookProvider: React.FC<React.PropsWithChildren> = ({
   const { user, onUpdateUser } = useContext(AuthContext);
   const [books, setBooks] = useState<Book[]>([]);
   const [sortMethod, setSortMethod] = useState<SortMethod>(
-    SortMethod.UpdatedDesc
+    SortMethod.AuthorAsc
   );
 
   const sortBooks = useCallback(
     (booksToSort: Book[]) => {
       switch (sortMethod) {
-        case SortMethod.UpdatedDesc:
-          return [...booksToSort].sort(
-            (b, a) =>
-              (a.updatedAt instanceof Date ? a.updatedAt.getTime() : 0) -
-              (b.updatedAt instanceof Date ? b.updatedAt.getTime() : 0)
-          );
-        case SortMethod.UpdatedAsc:
-          return [...booksToSort].sort(
-            (a, b) =>
-              (a.updatedAt instanceof Date ? a.updatedAt.getTime() : 0) -
-              (b.updatedAt instanceof Date ? b.updatedAt.getTime() : 0)
-          );
         case SortMethod.TitleAsc:
           return [...booksToSort].sort((a, b) =>
             a.title.localeCompare(b.title)
@@ -59,18 +47,6 @@ export const BookProvider: React.FC<React.PropsWithChildren> = ({
         case SortMethod.AuthorDesc:
           return [...booksToSort].sort((a, b) =>
             b.author.localeCompare(a.author)
-          );
-        case SortMethod.CreatedDesc:
-          return [...booksToSort].sort(
-            (b, a) =>
-              (a.createdAt instanceof Date ? a.createdAt.getTime() : 0) -
-              (b.createdAt instanceof Date ? b.createdAt.getTime() : 0)
-          );
-        case SortMethod.CreatedAsc:
-          return [...booksToSort].sort(
-            (a, b) =>
-              (a.createdAt instanceof Date ? a.createdAt.getTime() : 0) -
-              (b.createdAt instanceof Date ? b.createdAt.getTime() : 0)
           );
         default:
           return booksToSort;
