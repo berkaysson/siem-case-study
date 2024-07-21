@@ -25,6 +25,9 @@ const Layout: React.FC = () => {
       <Router>
         <Navigation />
         <Main>
+          <p className="description">
+            This is a book library app. You can add, edit and delete books.
+          </p>
           <Routes>
             <Route element={<PublicRoute isAuthenticated={!!user} />}>
               <Route path="/login" element={<Login />} />
@@ -56,9 +59,16 @@ const Main = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 1rem;
+
+  .description {
+    text-align: center;
+    color: ${(props) => props.theme.textAlt};
+    font-size: 0.875rem;
+    margin: 0.5rem;
+  }
 
   @media (max-width: 426px) {
-    padding: .2rem;
-    padding-top: 0.5rem;
+    padding: 0.2rem;
   }
 `;

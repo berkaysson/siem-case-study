@@ -20,6 +20,12 @@ const BookList: React.FC = () => {
         <option value={SortMethod.AuthorAsc}>Author (A-Z)</option>
         <option value={SortMethod.AuthorDesc}>Author (Z-A)</option>
       </StyledSelect>
+      {books.length === 0 && (
+        <p className="description">
+          No books found. Please add some books to the library. Use Add new Book
+          button above.
+        </p>
+      )}
       <StyledBooklist>
         {books.map((book) => (
           <BookItem key={book.id} book={book} />
@@ -43,7 +49,7 @@ const StyledBooklist = styled.ul`
   width: 100%;
 
   @media (max-width: 426px) {
-    padding: .2rem;
+    padding: 0.2rem;
   }
 `;
 
@@ -55,7 +61,7 @@ const StyledSelect = styled.select`
   background-color: ${(props) => props.theme.background};
   color: ${(props) => props.theme.text};
   box-shadow: ${(props) => props.theme.boxShadow};
-  font-size: .875rem;
+  font-size: 0.875rem;
 
   &:hover {
     background-color: ${(props) => props.theme.hover};
