@@ -15,6 +15,11 @@ export const Input = styled.input`
     font-size: 0.875rem;
     opacity: 0.8;
   }
+
+  @media (max-width: 426px) {
+    padding: .5rem;
+    width: 200px
+  }
 `;
 
 export const InputError = styled.p`

@@ -38,10 +38,13 @@ const StyledBooklist = styled.ul`
   justify-content: center;
   gap: 1.5rem;
   padding: 1rem;
-  min-width: 320px;
   max-width: 1280px;
   margin: 0 auto;
   width: 100%;
+
+  @media (max-width: 426px) {
+    padding: .2rem;
+  }
 `;
 
 const StyledSelect = styled.select`
@@ -52,6 +55,7 @@ const StyledSelect = styled.select`
   background-color: ${(props) => props.theme.background};
   color: ${(props) => props.theme.text};
   box-shadow: ${(props) => props.theme.boxShadow};
+  font-size: .875rem;
 
   &:hover {
     background-color: ${(props) => props.theme.hover};

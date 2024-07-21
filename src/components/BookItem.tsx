@@ -56,12 +56,18 @@ const StyledBookItem = styled.li`
   justify-content: flex-start;
   gap: 1rem;
   padding: 2rem;
-  min-width: 320px;
+  min-width: 250px;
   border-radius: 4px;
   background-color: ${(props) => props.theme.background};
   color: ${(props) => props.theme.text};
   transition: all 0.1s ease;
   box-shadow: ${(props) => props.theme.boxShadow};
+
+  @media (max-width: 426px) {
+    padding: 1rem;
+    gap: 0.5rem;
+    width: 100%;
+  }
 `;
 
 const StylesBookItemContent = styled.div`

@@ -48,7 +48,7 @@ const Wrapper = styled.div`
   background-color: ${(props) => props.theme.background};
   color: ${(props) => props.theme.text};
   min-height: 100%;
-  min-width: 100vw;
+  min-width: 100%;
 `;
 
 const Main = styled.main`
@@ -56,4 +56,8 @@ const Main = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media (max-width: 426px) {
+    padding: .2rem;
+  }
 `;

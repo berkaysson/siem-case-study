@@ -48,11 +48,19 @@ const StyledButton = styled.button<ButtonProps>`
         return `
           padding: 0.25rem 0.875rem;
           font-size: 0.875rem;
+          @media (max-width: 426px) {
+            padding: .2rem .6rem;
+            font-size: .75rem;
+          }
         `;
       default:
         return `
           padding: 0.5rem 1rem;
           font-size: 1rem;
+          @media (max-width: 426px) {
+            padding: .4rem .8rem;
+            font-size: .875rem;
+          }
         `;
     }
   }}

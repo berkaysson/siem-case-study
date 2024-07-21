@@ -38,6 +38,9 @@ const StyledBooks = styled.div`
   flex-direction: column;
   gap: 1rem;
   padding: 1rem;
-  min-width: 320px;
   max-width: 1280px;
+
+  @media (max-width: 426px) {
+    padding: .5rem;
+  }
 `;

@@ -46,12 +46,20 @@ const StyledNav = styled.nav`
   background-color: ${(props) => props.theme.background};
   border-bottom: 2px solid ${(props) => props.theme.textAlt};
   transition: all 0.1s ease;
+
+  @media (max-width: 426px) {
+    padding: 0.5rem;
+  }
 `;
 
 const NavGroup = styled.div`
   display: flex;
   align-items: center;
   gap: 1rem;
+
+  @media (max-width: 426px) {
+    gap: 1rem;
+  }
 `;
 
 const StyledNavLink = styled(NavLink)`
@@ -76,4 +84,8 @@ const WelcomeText = styled.h2`
   margin: 0;
   font-size: 1.2rem;
   color: ${(props) => props.theme.text};
+
+  @media (max-width: 426px) {
+    display: none;
+  }
 `;

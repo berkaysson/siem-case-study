@@ -110,6 +110,7 @@ html,
 body {
   margin: 0;
   padding: 0;
+  width: 100%;
 }
 
 body {
@@ -117,7 +118,7 @@ body {
   -webkit-font-smoothing: antialiased;
   height: 100%;
   display: flex;
-  min-width: 320px;
+  min-width: 280px;
   min-height: 100vh;
 }
 
@@ -132,4 +133,5 @@ li {
 
 #root {
   isolation: isolate;
+  width: 100%;
 }

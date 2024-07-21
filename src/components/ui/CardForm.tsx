@@ -3,7 +3,7 @@ export const CardForm = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  min-width: 320px;
+  min-width: 280px;
   border-radius: 4px;
   padding: 1rem;
   box-shadow: ${(props) => props.theme.boxShadow};
@@ -22,6 +22,15 @@ export const CardForm = styled.div`
 
     &:hover {
       color: ${(props) => props.theme.text};
+    }
+  }
+
+  @media (max-width: 426px) {
+    padding: .5rem;
+    min-width: 250px;
+
+    h1 {
+      font-size: 1rem;
     }
   }
 `;
