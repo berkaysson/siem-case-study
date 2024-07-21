@@ -11,7 +11,11 @@ import { BadgePlus } from "lucide-react";
 
 type BookFormData = z.infer<typeof bookSchema>;
 
-const BookForm: React.FC = () => {
+interface BookFormProps {
+  setIsBookFormModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const BookForm = ({ setIsBookFormModalOpen }: BookFormProps) => {
   const { addBook } = useContext(BookContext);
   const {
     register,
@@ -25,6 +29,7 @@ const BookForm: React.FC = () => {
   const onSubmit = (data: BookFormData) => {
     addBook(data.title, data.author);
     reset();
+    setIsBookFormModalOpen(false);
   };
 
   return (

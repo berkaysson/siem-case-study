@@ -22,7 +22,7 @@ const Books: React.FC = () => {
       <BookList />
       {isBookFormModalOpen && (
         <Modal onClose={() => setIsBookFormModalOpen(false)}>
-          <BookForm />
+          <BookForm setIsBookFormModalOpen={setIsBookFormModalOpen} />
         </Modal>
       )}
     </div>
