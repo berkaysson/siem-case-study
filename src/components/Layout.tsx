@@ -13,9 +13,12 @@ import Books from "./Books";
 import { AuthContext } from "../context/AuthContext";
 import { useContext } from "react";
 import NotFound from "./NotFound";
+import { ThemeContext } from "../context/ThemeContext";
 
 const Layout: React.FC = () => {
   const { user } = useContext(AuthContext);
+  const { toggleTheme, isDarkMode } = useContext(ThemeContext);
+
   return (
     <Router>
       {!user && (
@@ -24,6 +27,9 @@ const Layout: React.FC = () => {
             Login
           </Link>
           <Link to="/register">Register</Link>
+          <button onClick={toggleTheme}>
+            {isDarkMode ? "Light" : "Dark"}
+          </button>
         </nav>
       )}
 
