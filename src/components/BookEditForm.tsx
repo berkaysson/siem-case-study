@@ -5,6 +5,10 @@ import { bookSchema } from "../utils/schema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Book } from "../types/Book";
+import { CardForm, FormGroup } from "./ui/CardForm";
+import Button from "./ui/Button";
+import { Input, InputError } from "./ui/Input";
+import { CircleSlash, Save } from "lucide-react";
 
 type BookFormData = z.infer<typeof bookSchema>;
 
@@ -29,29 +33,44 @@ const BookEditForm = ({ book, setIsEditing }: BookEditFormProps) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSave)}>
-      <div>
-        Title:
-        <input
-          type="text"
-          {...register("title")}
-          placeholder="Title"
-          defaultValue={book.title}
-        />
-        {errors.title && <p>{errors.title.message}</p>}
-      </div>
-      <div>
-        Author:
-        <input
-          type="text"
-          {...register("author")}
-          placeholder="Author"
-          defaultValue={book.author}
-        />
-        {errors.author && <p>{errors.author.message}</p>}
-      </div>
-      <button type="submit">Save Book</button>
-    </form>
+    <CardForm>
+      <h1>Edit Book</h1>
+      <form onSubmit={handleSubmit(onSave)}>
+        <FormGroup>
+          <label>Title</label>
+          <Input
+            type="text"
+            {...register("title")}
+            placeholder="Title"
+            defaultValue={book.title}
+          />
+          {errors.title && <InputError>{errors.title.message}</InputError>}
+
+          <label>Author</label>
+          <Input
+            type="text"
+            {...register("author")}
+            placeholder="Author"
+            defaultValue={book.author}
+          />
+          {errors.author && <InputError>{errors.author.message}</InputError>}
+
+          <Button fullWidth type="submit" icon={<Save size={16} />}>
+            Save Book
+          </Button>
+        </FormGroup>
+      </form>
+
+      <Button
+        size="small"
+        type="button"
+        onClick={() => setIsEditing(false)}
+        fullWidth
+        icon={<CircleSlash size={13} />}
+      >
+        Cancel
+      </Button>
+    </CardForm>
   );
 };
 

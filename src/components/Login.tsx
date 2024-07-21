@@ -1,6 +1,10 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Button from "./ui/Button";
+import { CardForm, FormGroup } from "./ui/CardForm";
+import { Input } from "./ui/Input";
+import { LogIn } from "lucide-react";
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState("");
@@ -19,25 +23,33 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div>
+    <CardForm>
+      <h1>Login</h1>
       <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          placeholder="Username"
-          required
-        />
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
-          required
-        />
-        <button type="submit">Login</button>
+        <FormGroup>
+          <label>Username</label>
+          <Input
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            placeholder="Username"
+            required
+          />
+          <label>Password</label>
+          <Input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
+            required
+          />
+          <Button fullWidth type="submit" icon={<LogIn size={16} />}>Login</Button>
+        </FormGroup>
       </form>
-    </div>
+      <p className="link">
+        <Link to="/register">Don't have an account?</Link>
+      </p>
+    </CardForm>
   );
 };
 

@@ -4,6 +4,10 @@ import { z } from "zod";
 import { bookSchema } from "../utils/schema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { CardForm, FormGroup } from "./ui/CardForm";
+import Button from "./ui/Button";
+import { Input, InputError } from "./ui/Input";
+import { BadgePlus } from "lucide-react";
 
 type BookFormData = z.infer<typeof bookSchema>;
 
@@ -24,24 +28,22 @@ const BookForm: React.FC = () => {
   };
 
   return (
-    <div>
-      BookForm
-      <div>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div>
-            Title:
-            <input type="text" {...register("title")} placeholder="Title" />
-            {errors.title && <p>{errors.title.message}</p>}
-          </div>
-          <div>
-            Author:
-            <input type="text" {...register("author")} placeholder="Author" />
-            {errors.author && <p>{errors.author.message}</p>}
-          </div>
-          <button type="submit">Add Book</button>
-        </form>
-      </div>
-    </div>
+    <CardForm>
+      <h1>Add new book</h1>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <FormGroup>
+          <label>Title</label>
+          <Input type="text" {...register("title")} placeholder="Title" />
+          {errors.title && <InputError>{errors.title.message}</InputError>}
+          <label>Author</label>
+          <Input type="text" {...register("author")} placeholder="Author" />
+          {errors.author && <InputError>{errors.author.message}</InputError>}
+          <Button icon={<BadgePlus size={16} />} fullWidth type="submit">
+            Add Book
+          </Button>
+        </FormGroup>
+      </form>
+    </CardForm>
   );
 };
 

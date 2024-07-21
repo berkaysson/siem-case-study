@@ -1,10 +1,14 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { registerSchema } from "../utils/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Input, InputError } from "./ui/Input";
+import Button from "./ui/Button";
+import { CardForm, FormGroup } from "./ui/CardForm";
+import { UserPlus } from "lucide-react";
 
 type RegisterFormData = z.infer<typeof registerSchema>;
 
@@ -30,31 +34,45 @@ const Register: React.FC = () => {
   };
 
   return (
-    <div>
+    <CardForm>
+      <h1>Create new account</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <input type="text" {...register("username")} placeholder="Username" />
-          {errors.username && <p>{errors.username.message}</p>}
-        </div>
-        <div>
-          <input
+        <FormGroup>
+          <label>Username</label>
+          <Input type="text" {...register("username")} placeholder="Username" />
+          {errors.username && (
+            <InputError>{errors.username.message}</InputError>
+          )}
+
+          <label>Password</label>
+          <Input
             type="password"
             {...register("password")}
             placeholder="Password"
           />
-          {errors.password && <p>{errors.password.message}</p>}
-        </div>
-        <div>
-          <input
+          {errors.password && (
+            <InputError>{errors.password.message}</InputError>
+          )}
+
+          <label>Confirm Password</label>
+          <Input
             type="password"
             {...register("confirmPassword")}
             placeholder="Confirm Password"
           />
-          {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
-        </div>
-        <button type="submit">Register</button>
+          {errors.confirmPassword && (
+            <InputError>{errors.confirmPassword.message}</InputError>
+          )}
+
+          <Button icon={<UserPlus size={16} />} type="submit" fullWidth>
+            Register
+          </Button>
+        </FormGroup>
       </form>
-    </div>
+      <p className="link">
+        <Link to="/login">Already have an account? </Link>
+      </p>
+    </CardForm>
   );
 };
 
