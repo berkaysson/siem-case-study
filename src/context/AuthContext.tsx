@@ -1,19 +1,14 @@
 import React, { createContext, useState, useMemo } from "react";
-import { createUser, getUser } from "../utils/localStarage";
+import { createUser, getUser, updateUser } from "../utils/localStarage";
 import { IUser } from "../types/User";
-
-interface AuthContextType {
-  user: IUser | null;
-  login: (username: string, password: string) => Promise<void>;
-  register: (username: string, password: string) => Promise<void>;
-  logout: () => void;
-}
+import { AuthContextType } from "../types/AuthContext";
 
 export const AuthContext = createContext<AuthContextType>({
   user: null,
   login: async () => {},
   register: async () => {},
   logout: async () => {},
+  onUpdateUser: () => {},
 });
 
 export const AuthProvider: React.FC<React.PropsWithChildren> = ({
@@ -53,8 +48,17 @@ export const AuthProvider: React.FC<React.PropsWithChildren> = ({
     setUser(null);
   };
 
+  const onUpdateUser = (newUser: IUser | null) => {
+    if (newUser) {
+      updateUser(newUser);
+      setUser(newUser);
+    } else {
+      console.error("User is null in onUpdateUser");
+    }
+  };
+
   const contextValue = useMemo(
-    () => ({ user, login, register, logout }),
+    () => ({ user, login, register, logout, onUpdateUser }),
     [user]
   );
 
