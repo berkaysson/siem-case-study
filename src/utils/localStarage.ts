@@ -12,3 +12,7 @@ export const createUser = (user: IUser) => {
 export const removeUser = () => {
   localStorage.removeItem("user");
 };
+
+export const updateUser = (user: IUser) => {
+  localStorage.setItem("user", JSON.stringify(user));
+}
