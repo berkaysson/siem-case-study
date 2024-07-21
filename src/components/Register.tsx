@@ -1,17 +1,28 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { registerSchema } from "../utils/schema";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+type RegisterFormData = z.infer<typeof registerSchema>;
 
 const Register: React.FC = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const { register } = useContext(AuthContext);
+  const { register: authRegister } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<RegisterFormData>({
+    resolver: zodResolver(registerSchema),
+  });
+
+  const onSubmit = async (data: RegisterFormData) => {
     try {
-      await register(username, password);
+      await authRegister(data.username, data.password);
       navigate("/login");
     } catch (error) {
       console.error("Registration failed:", error);
@@ -20,21 +31,27 @@ const Register: React.FC = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          placeholder="Username"
-          required
-        />
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
-          required
-        />
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div>
+          <input type="text" {...register("username")} placeholder="Username" />
+          {errors.username && <p>{errors.username.message}</p>}
+        </div>
+        <div>
+          <input
+            type="password"
+            {...register("password")}
+            placeholder="Password"
+          />
+          {errors.password && <p>{errors.password.message}</p>}
+        </div>
+        <div>
+          <input
+            type="password"
+            {...register("confirmPassword")}
+            placeholder="Confirm Password"
+          />
+          {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
+        </div>
         <button type="submit">Register</button>
       </form>
     </div>
