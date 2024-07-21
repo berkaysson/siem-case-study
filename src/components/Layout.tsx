@@ -3,6 +3,7 @@ import {
   Routes,
   Route,
   Navigate,
+  Link,
 } from "react-router-dom";
 import PublicRoute from "../routes/PublicRoute";
 import Login from "./Login";
@@ -11,11 +12,21 @@ import PrivateRoute from "../routes/PrivateRoute";
 import Books from "./Books";
 import { AuthContext } from "../context/AuthContext";
 import { useContext } from "react";
+import NotFound from "./NotFound";
 
 const Layout: React.FC = () => {
   const { user } = useContext(AuthContext);
   return (
     <Router>
+      {!user && (
+        <nav>
+          <Link to="/login" style={{ marginRight: "10px" }}>
+            Login
+          </Link>
+          <Link to="/register">Register</Link>
+        </nav>
+      )}
+
       <Routes>
         <Route element={<PublicRoute isAuthenticated={!!user} />}>
           <Route path="/login" element={<Login />} />
@@ -25,6 +36,7 @@ const Layout: React.FC = () => {
           <Route path="/books" element={<Books />} />
         </Route>
         <Route path="/" element={<Navigate to="/login" replace />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );
