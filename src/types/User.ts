@@ -1,9 +1,9 @@
-import { IBook } from "./Book";
+import { Book } from "./Book";
 
-export interface IUser {
+export interface User {
     id: string;
     username: string;
     password: string;
     createdAt: Date;
-    books: IBook[];
+    books: Book[];
 }

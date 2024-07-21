@@ -1,6 +1,6 @@
 import React, { createContext, useState, useMemo } from "react";
-import { createUser, getUser, updateUser } from "../utils/localStarage";
-import { IUser } from "../types/User";
+import { createUser, getUser, updateUser } from "../utils/localStorage";
+import { User } from "../types/User";
 import { AuthContextType } from "../types/AuthContext";
 
 export const AuthContext = createContext<AuthContextType>({
@@ -14,25 +14,26 @@ export const AuthContext = createContext<AuthContextType>({
 export const AuthProvider: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
-  const [user, setUser] = useState<IUser | null>(null);
+  const [user, setUser] = useState<User | null>(null);
 
   const login = async (username: string, password: string) => {
     const storedUser = getUser();
-    if (storedUser) {
-      if (
-        storedUser.username === username &&
-        storedUser.password === password
-      ) {
-        setUser(storedUser);
-      } else {
-        alert("Invalid credentials");
-      }
+    if (storedUser === null) {
+      alert("Invalid credentials");
+      return;
+    }
+    if (storedUser.username === username && storedUser.password === password) {
+      setUser(storedUser);
     } else {
       alert("Invalid credentials");
     }
   };
 
   const register = async (username: string, password: string) => {
+    if (!username || !password) {
+      throw new Error("Username and password are required");
+    }
+
     const newUser = {
       id: crypto.randomUUID(),
       username,
@@ -48,7 +49,7 @@ export const AuthProvider: React.FC<React.PropsWithChildren> = ({
     setUser(null);
   };
 
-  const onUpdateUser = (newUser: IUser | null) => {
+  const onUpdateUser = (newUser: User | null) => {
     if (newUser) {
       updateUser(newUser);
       setUser(newUser);

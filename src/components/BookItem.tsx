@@ -1,8 +1,8 @@
 import { useContext, useState } from "react";
 import { BookContext } from "../context/BookContext";
-import { IBook } from "../types/Book";
+import { Book } from "../types/Book";
 
-const BookItem = ({ book }: { book: IBook }) => {
+const BookItem = ({ book }: { book: Book }) => {
   const { deleteBook, updateBook } = useContext(BookContext);
   const [isEditing, setIsEditing] = useState(false);
 

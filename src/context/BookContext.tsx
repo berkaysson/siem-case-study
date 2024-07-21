@@ -7,8 +7,8 @@ import React, {
   useState,
 } from "react";
 import { AuthContext } from "./AuthContext";
-import { IBook } from "../types/Book";
-import { IUser } from "../types/User";
+import { Book } from "../types/Book";
+import { User } from "../types/User";
 import { BookContextType, SortMethod } from "../types/BookContext";
 
 export const BookContext = createContext<BookContextType>({
@@ -24,13 +24,13 @@ export const BookProvider: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
   const { user, onUpdateUser } = useContext(AuthContext);
-  const [books, setBooks] = useState<IBook[]>([]);
+  const [books, setBooks] = useState<Book[]>([]);
   const [sortMethod, setSortMethod] = useState<SortMethod>(
     SortMethod.UpdatedDesc
   );
 
   const sortBooks = useCallback(
-    (booksToSort: IBook[]) => {
+    (booksToSort: Book[]) => {
       switch (sortMethod) {
         case SortMethod.UpdatedDesc:
           return [...booksToSort].sort(
@@ -87,15 +87,16 @@ export const BookProvider: React.FC<React.PropsWithChildren> = ({
   }, [user, sortMethod, sortBooks]);
 
   const addBook = (title: string, author: string) => {
-    if (!user) return;
-    const newBook: IBook = {
+    if (!user) return alert("Please login first");
+    if (!title || !author) return alert("Please enter a title and author");
+    const newBook: Book = {
       id: crypto.randomUUID(),
       title,
       author,
       createdAt: new Date(),
       updatedAt: new Date(),
     };
-    const newUser: IUser = {
+    const newUser: User = {
       ...user,
       books: [...user.books, newBook],
     };
@@ -103,8 +104,9 @@ export const BookProvider: React.FC<React.PropsWithChildren> = ({
   };
 
   const deleteBook = (bookId: string) => {
-    if (!user) return;
-    const newUser: IUser = {
+    if (!user) return alert("Please login first");
+    if (!bookId) return alert("Please select a book to delete");
+    const newUser: User = {
       ...user,
       books: user.books.filter((book) => book.id !== bookId),
     };
@@ -112,11 +114,12 @@ export const BookProvider: React.FC<React.PropsWithChildren> = ({
   };
 
   const updateBook = (id: string, title: string, author: string) => {
-    if (!user) return;
+    if (!user) return alert("Please login first");
+    if (!title || !author) return alert("Please enter a title and author");
     const updatedBooks = user.books.map((book) =>
       book.id === id ? { ...book, title, author, updatedAt: new Date() } : book
     );
-    const newUser: IUser = {
+    const newUser: User = {
       ...user,
       books: updatedBooks,
     };

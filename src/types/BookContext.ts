@@ -1,4 +1,4 @@
-import { IBook } from "./Book";
+import { Book } from "./Book";
 
 export enum SortMethod {
   UpdatedDesc = "updated_desc",
@@ -12,7 +12,7 @@ export enum SortMethod {
 }
 
 export interface BookContextType {
-  books: IBook[];
+  books: Book[];
   addBook: (title: string, author: string) => void;
   deleteBook: (bookId: string) => void;
   updateBook: (id: string, title: string, author: string) => void;
