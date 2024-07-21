@@ -8,7 +8,7 @@ import { Book } from "../types/Book";
 import { CardForm, FormGroup } from "./ui/CardForm";
 import Button from "./ui/Button";
 import { Input, InputError } from "./ui/Input";
-import { CircleSlash, Save } from "lucide-react";
+import { Save } from "lucide-react";
 
 type BookFormData = z.infer<typeof bookSchema>;
 
@@ -60,16 +60,6 @@ const BookEditForm = ({ book, setIsEditing }: BookEditFormProps) => {
           </Button>
         </FormGroup>
       </form>
-
-      <Button
-        size="small"
-        type="button"
-        onClick={() => setIsEditing(false)}
-        fullWidth
-        icon={<CircleSlash size={13} />}
-      >
-        Cancel
-      </Button>
     </CardForm>
   );
 };

@@ -4,6 +4,7 @@ import { Book } from "../types/Book";
 import BookEditForm from "./BookEditForm";
 import Button from "./ui/Button";
 import { Pencil, Trash2 } from "lucide-react";
+import Modal from "./ui/Modal";
 
 const BookItem = ({ book }: { book: Book }) => {
   const { deleteBook } = useContext(BookContext);
@@ -11,21 +12,16 @@ const BookItem = ({ book }: { book: Book }) => {
 
   return (
     <li>
-      {isEditing ? (
-        <BookEditForm book={book} setIsEditing={setIsEditing} />
-      ) : (
-        <>
-          <div>{book.title}</div>
-          <div>{book.author}</div>
-          <Button
-            icon={<Pencil size={16} />}
-            type="button"
-            onClick={() => setIsEditing(true)}
-          >
-            Edit
-          </Button>
-        </>
-      )}
+      <div>{book.title}</div>
+      <div>{book.author}</div>
+      <Button
+        icon={<Pencil size={16} />}
+        type="button"
+        onClick={() => setIsEditing(true)}
+      >
+        Edit
+      </Button>
+
       <Button
         icon={<Trash2 size={16} />}
         type="button"
@@ -33,6 +29,10 @@ const BookItem = ({ book }: { book: Book }) => {
       >
         Delete
       </Button>
+
+      {isEditing && (<Modal onClose={() => setIsEditing(false)}>
+        <BookEditForm book={book} setIsEditing={setIsEditing} />
+      </Modal>)}
     </li>
   );
 };
