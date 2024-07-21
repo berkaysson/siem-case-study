@@ -2,6 +2,9 @@ import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { ThemeContext } from "../../context/ThemeContext";
+import styled from "styled-components";
+import { LogOut, Moon, Sun } from "lucide-react";
+import Button from "./Button";
 
 const Navigation = () => {
   const { user, logout } = useContext(AuthContext);
@@ -9,26 +12,68 @@ const Navigation = () => {
 
   const authNavigation = (
     <>
-      <NavLink to="/login" style={{ marginRight: "10px" }}>
-        Login
-      </NavLink>
-      <NavLink to="/register">Register</NavLink>
+      <StyledNavLink to="/login">Login</StyledNavLink>
+      <StyledNavLink to="/register">Register</StyledNavLink>
     </>
   );
 
   const userNavigation = (
     <>
-      <h1>Welcome {user?.username}</h1>
-      <button onClick={logout}>Logout</button>
+      <WelcomeText>Welcome {user?.username}</WelcomeText>
+      <Button variant="primary" icon={<LogOut size={20} />} onClick={logout}>
+        Logout
+      </Button>
     </>
   );
 
   return (
-    <nav>
-      {user ? userNavigation : authNavigation}
-      <button onClick={toggleTheme}>{isDarkMode ? "Light" : "Dark"}</button>
-    </nav>
+    <StyledNav>
+      <NavGroup>{user ? userNavigation : authNavigation}</NavGroup>
+      <Button size="small" variant="ghost" onClick={toggleTheme}>
+        {isDarkMode ? <Sun /> : <Moon />}
+      </Button>
+    </StyledNav>
   );
 };
 
 export default Navigation;
+
+const StyledNav = styled.nav`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background-color: ${(props) => props.theme.background};
+  border-bottom: 2px solid ${(props) => props.theme.textAlt};
+  transition: all 0.1s ease;
+`;
+
+const NavGroup = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+`;
+
+const StyledNavLink = styled(NavLink)`
+  color: ${(props) => props.theme.text};
+  text-decoration: none;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: all 0.1s ease;
+  text-decoration: underline;
+
+  &:hover {
+    background-color: ${(props) => props.theme.hover};
+  }
+
+  &.active {
+    color: ${(props) => props.theme.textAlt};
+  }
+`;
+
+const WelcomeText = styled.h2`
+  margin: 0;
+  font-size: 1.2rem;
+  color: ${(props) => props.theme.text};
+`;
