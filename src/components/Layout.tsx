@@ -59,5 +59,6 @@ const Main = styled.main`
 
   @media (max-width: 426px) {
     padding: .2rem;
+    padding-top: 0.5rem;
   }
 `;
