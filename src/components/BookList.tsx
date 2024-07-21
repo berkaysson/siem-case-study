@@ -33,8 +33,10 @@ export default BookList;
 
 const StyledBooklist = styled.ul`
   display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
   padding: 1rem;
   min-width: 320px;
   max-width: 1280px;

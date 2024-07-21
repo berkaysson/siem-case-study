@@ -16,6 +16,7 @@ const Books: React.FC = () => {
           onClick={() => setIsBookFormModalOpen(true)}
           variant="primary"
           icon={<BadgePlus size={16} />}
+          fullWidth
         >
           Add new book
         </Button>

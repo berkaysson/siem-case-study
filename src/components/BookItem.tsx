@@ -61,7 +61,6 @@ const StyledBookItem = styled.li`
   background-color: ${(props) => props.theme.background};
   color: ${(props) => props.theme.text};
   transition: all 0.1s ease;
-  width: 100%;
   box-shadow: ${(props) => props.theme.boxShadow};
 `;
 
