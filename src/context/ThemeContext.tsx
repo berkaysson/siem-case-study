@@ -8,6 +8,8 @@ const lightTheme = {
   textAlt: "#20a3fe",
   hover: "#a0c0da83",
   boxShadow: "0 0 1px 1px #a0c0da83 inset",
+  boxShadowAlt:
+    "rgba(50, 50, 93, 0.25) 0px 0px 7px -2px,rgba(0, 0, 0, 0.25) 0px 3px 10px -3px;",
 };
 
 const darkTheme = {
@@ -16,6 +18,8 @@ const darkTheme = {
   textAlt: "#20a3fe",
   hover: "#a0c0da83",
   boxShadow: "0 0 1px 1px #a0c0da83 inset",
+  boxShadowAlt:
+    "rgba(209, 209, 224, 0.25) 0px 0px 7px -2px,rgba(212, 208, 208, 0.25) 0px 3px 10px -3px;",
 };
 
 interface ThemeContextType {

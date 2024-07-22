@@ -26,7 +26,7 @@ export const CardForm = styled.div`
   }
 
   @media (max-width: 426px) {
-    padding: .5rem;
+    padding: 0.5rem;
     min-width: 250px;
 
     h1 {

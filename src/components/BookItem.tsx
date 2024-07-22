@@ -59,10 +59,11 @@ const StyledBookItem = styled.li`
   padding: 2rem;
   min-width: 250px;
   border-radius: 4px;
+  border: 1px solid ${(props) => props.theme.hover};
   background-color: ${(props) => props.theme.background};
   color: ${(props) => props.theme.text};
   transition: all 0.2s ease;
-  box-shadow: ${(props) => props.theme.boxShadow};
+  box-shadow: ${(props) => props.theme.boxShadowAlt};
 
   @media (max-width: 426px) {
     padding: 1rem;
@@ -84,5 +85,5 @@ const StyledBookItemActions = styled.div`
   width: 100%;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  gap: .8rem;
 `;
