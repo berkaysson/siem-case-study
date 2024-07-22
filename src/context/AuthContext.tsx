@@ -42,7 +42,6 @@ export const AuthProvider: React.FC<React.PropsWithChildren> = ({
       books: [],
     };
     createUser(newUser);
-    setUser(newUser);
   };
 
   const logout = () => {
