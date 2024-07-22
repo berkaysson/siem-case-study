@@ -19,6 +19,7 @@ const Modal = ({ onClose, children }: ModalProps) => {
           onClick={onClose}
           variant="ghost"
           fullWidth
+          destructive
         >
           Close
         </Button>

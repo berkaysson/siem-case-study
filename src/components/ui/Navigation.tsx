@@ -20,7 +20,12 @@ const Navigation = () => {
   const userNavigation = (
     <>
       <WelcomeText>Welcome {user?.username}</WelcomeText>
-      <Button variant="primary" icon={<LogOut size={20} />} onClick={logout}>
+      <Button
+        variant="primary"
+        icon={<LogOut size={20} />}
+        onClick={logout}
+        destructive
+      >
         Logout
       </Button>
     </>

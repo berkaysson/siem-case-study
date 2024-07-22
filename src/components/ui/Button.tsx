@@ -4,6 +4,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "ghost";
   size?: "small" | "medium";
   fullWidth?: boolean;
+  destructive?: boolean;
   icon?: React.ReactNode;
 }
 
@@ -12,6 +13,7 @@ const Button: React.FC<ButtonProps> = ({
   variant = "primary",
   size = "medium",
   fullWidth = false,
+  destructive = false,
   icon,
   ...props
 }) => {
@@ -20,6 +22,7 @@ const Button: React.FC<ButtonProps> = ({
       variant={variant}
       size={size}
       fullWidth={fullWidth}
+      destructive={destructive}
       {...props}
     >
       {icon && <IconWrapper>{icon}</IconWrapper>}
@@ -94,6 +97,8 @@ const StyledButton = styled.button<ButtonProps>`
         `;
     }
   }}
+
+  ${({ destructive }) => destructive && `color: #c75151;`}
 
   &:disabled {
     opacity: 0.5;

@@ -33,6 +33,7 @@ const BookItem = ({ book }: { book: Book }) => {
           onClick={() => deleteBook(book.id)}
           fullWidth
           size="small"
+          destructive
         >
           Delete
         </Button>
