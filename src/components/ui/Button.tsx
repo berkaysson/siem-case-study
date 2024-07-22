@@ -41,7 +41,7 @@ const StyledButton = styled.button<ButtonProps>`
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  transition: all 0.1s ease;
+  transition: all 0.2s ease;
 
   ${({ fullWidth }) => fullWidth && `width: 100%;`}
 

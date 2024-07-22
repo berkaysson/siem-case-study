@@ -50,7 +50,7 @@ const StyledNav = styled.nav`
   padding: 1rem 2rem;
   background-color: ${(props) => props.theme.background};
   border-bottom: 2px solid ${(props) => props.theme.textAlt};
-  transition: all 0.1s ease;
+  transition: all 0.2s ease;
 
   @media (max-width: 426px) {
     padding: 0.5rem;
@@ -73,7 +73,7 @@ const StyledNavLink = styled(NavLink)`
   font-weight: bold;
   padding: 0.5rem 1rem;
   border-radius: 4px;
-  transition: all 0.1s ease;
+  transition: all 0.2s ease;
   text-decoration: underline;
 
   &:hover {

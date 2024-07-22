@@ -61,7 +61,7 @@ const StyledBookItem = styled.li`
   border-radius: 4px;
   background-color: ${(props) => props.theme.background};
   color: ${(props) => props.theme.text};
-  transition: all 0.1s ease;
+  transition: all 0.2s ease;
   box-shadow: ${(props) => props.theme.boxShadow};
 
   @media (max-width: 426px) {

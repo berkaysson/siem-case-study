@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Input = styled.input`
   border: none;
   border-radius: 4px;
-  transition: all 0.1s ease;
+  transition: all 0.2s ease;
   padding: 0.5rem 1rem;
   font-size: 1rem;
   background-color: ${(props) => props.theme.hover};
